@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 
 const { Header, Content, Footer } = Layout;
@@ -10,7 +10,7 @@ const CustomLayout = (props) => {
             <Header>
               <div className="logo" />
               <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                {new Array(15).fill(null).map((_, index) => {
+                {new Array(5).fill(null).map((_, index) => {
                   const key = index + 1;
                   return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
                 })}
@@ -18,9 +18,8 @@ const CustomLayout = (props) => {
             </Header>
             <Content style={{ padding: '0 50px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/'>Home</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/'>List</Link></Breadcrumb.Item>
               </Breadcrumb>
               <div className="site-layout-content">
                   {props.children}
