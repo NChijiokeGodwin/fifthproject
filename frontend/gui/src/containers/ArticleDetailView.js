@@ -3,6 +3,8 @@ import Axios from 'axios';
 
 import { Card } from 'antd';
 
+import CustomForm from '../components/Form';
+
 
 class ArticleDetail extends Component {
 
@@ -22,9 +24,14 @@ class ArticleDetail extends Component {
 
     render() {
       return (
-          <Card title={this.state.article.title} >
-              <p>{this.state.article.content}</p>
-          </Card>
+          <div>
+            <Card title={this.state.article.title} >
+                <p>{this.state.article.content}</p>
+            </Card>
+            <CustomForm
+                requestType="post"
+                articleID={this.props.match.params.articleID} />
+          </div> 
       )}}
 
 
