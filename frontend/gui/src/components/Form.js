@@ -1,30 +1,39 @@
 import React, { Component} from 'react';
-import Axios from 'axios';
-import { Form, Input, Button } from 'antd';
 import axios from 'axios';
+import { Form, Input, Button } from 'antd';
 
 class CustomForm extends Component {
+    
+    constructor (props)
 
-    handleFormSubmit = (event, requestType, articleID) => {
+    handleFormSubmit =  async (event, requestType, articleID) => {
         event.preventDefault();
         const title = event.target.elements.title.value;
         const content = event.target.elements.content.value;    
         
         switch ( requestType ) {
             case 'post':
-                axios.post('http://127.0.0.1:8000/api/', {
-                    title: title,
-                    content:content
-                })
-                .then(res => console.log(res))
-                .catch(err => console.err(error));
+                try {
+                    const res = await axios.post('http://127.0.0.1:8000/api/', {
+                        title: title,
+                        content: content
+                    });
+                    return console.log(res);
+                }
+                catch (error) {
+                    return console.err(error);
+                }
             case 'put':
-                axios.put(`http://127.0.0.1:8000/api/${articleID}/`, {
-                    title: title,
-                    content:content
-                })
-                .then(res => console.log(res))
-                .catch(err => console.err(error));
+                try {
+                    const res_1 = await axios.put(`http://127.0.0.1:8000/api/${articleID}/`, {
+                        title: title,
+                        content: content
+                    });
+                    return console.log(res_1);
+                }
+                catch (error_1) {
+                    return console.err(error_1);
+                }
         }
     }
 
@@ -44,7 +53,7 @@ class CustomForm extends Component {
                 <Input name="content" placeholder="Type in some content" />
                 </Form.Item>
                 <Form.Item >
-                <Button type="primary" htmlType="submit" >Submit</Button>
+                <Button type="primary" htmlType="submit" >{this.props.btnText}</Button>
                 </Form.Item>
             </Form>
             </div>

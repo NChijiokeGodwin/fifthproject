@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 import Articles from '../components/Article';
 import CustomForm from '../components/Form';
@@ -12,7 +12,7 @@ class ArticleList extends Component {
     }
 
     componentDidMount() {
-        Axios.get('http://127.0.0.1:8000/api/')
+        axios.get('http://127.0.0.1:8000/api/')
         .then(res => {
             this.setState({
                 articles: res.data
@@ -28,7 +28,8 @@ class ArticleList extends Component {
             <h2>Create an article</h2>
             <CustomForm 
                 requestType="post"
-                articleID={null} />
+                articleID={null}
+                btnText="Create" />
           </div> 
       )}}
 

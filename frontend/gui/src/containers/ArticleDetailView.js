@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 import { Card } from 'antd';
 
@@ -14,7 +14,7 @@ class ArticleDetail extends Component {
 
     componentDidMount() {
         const articleID = this.props.match.params.articleID;
-        Axios.get(`http://127.0.0.1:8000/api/${articleID}`)
+        axios.get(`http://127.0.0.1:8000/api/${articleID}`)
         .then(res => {
             this.setState({
                 article: res.data
@@ -29,8 +29,9 @@ class ArticleDetail extends Component {
                 <p>{this.state.article.content}</p>
             </Card>
             <CustomForm
-                requestType="post"
-                articleID={this.props.match.params.articleID} />
+                requestType="put"
+                articleID={this.props.match.params.articleID}
+                btnText="Update" />
           </div> 
       )}}
 
