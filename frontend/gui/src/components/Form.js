@@ -16,17 +16,21 @@ class CustomForm extends React.Component {
                     content: content
                 })
                 .then(res => console.log(res))
-                .catch(error => console.err(error));
+                .catch(error => console.error(error));
             case 'put':
                 return axios.put(`http://127.0.0.1:8000/api/${articleID}/`, {
                     title: title,
                     content: content
                 })
                 .then(res => console.log(res))
-                .catch(error => console.err(error));
+                .catch(error => console.error(error));
         }
-        this.formRef.current.resetFields();
+        this.forceUpdate();
     }
+
+    onReset = () => {
+        this.formRef.current.resetFields();
+    };
 
     
     handleChange = (event) => {
