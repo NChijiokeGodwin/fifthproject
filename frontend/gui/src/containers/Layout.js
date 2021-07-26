@@ -10,10 +10,16 @@ const CustomLayout = (props) => {
             <Header>
               <div className="logo" />
               <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                {new Array(5).fill(null).map((_, index) => {
+              <Menu.Item key="1">
+                <Link to='/'>Posts</Link>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Link to='/login'>Login</Link>
+              </Menu.Item>
+                {/* {new Array(5).fill(null).map((_, index) => {
                   const key = index + 1;
                   return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-                })}
+                })} */}
               </Menu>
             </Header>
             <Content style={{ padding: '0 50px' }}>
