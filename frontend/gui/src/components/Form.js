@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form, Input, Button } from 'antd';
 
 class CustomForm extends React.Component {
-    formRef = React.createRef();
+    
 
     handleFormSubmit = (event, requestType, articleID) => {
         const title = this.state.title;
@@ -25,12 +25,7 @@ class CustomForm extends React.Component {
                 .then(res => console.log(res))
                 .catch(error => console.error(error));
         }
-        this.forceUpdate();
     }
-
-    onReset = () => {
-        this.formRef.current.resetFields();
-    };
 
     
     handleChange = (event) => {

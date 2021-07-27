@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 
@@ -10,12 +10,25 @@ const CustomLayout = (props) => {
             <Header>
               <div className="logo" />
               <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+
+                {
+                  props.isAuthenticated ?
+
+                  <Menu.Item key="2">
+                    Logout
+                  </Menu.Item>
+
+                  :
+
+                  <Menu.Item key="2">
+                    <Link to='/login'></Link>Login
+                  </Menu.Item>
+                }
+
               <Menu.Item key="1">
                 <Link to='/'>Posts</Link>
               </Menu.Item>
-              <Menu.Item key="2">
-                <Link to='/login'>Login</Link>
-              </Menu.Item>
+              
                 {/* {new Array(5).fill(null).map((_, index) => {
                   const key = index + 1;
                   return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
