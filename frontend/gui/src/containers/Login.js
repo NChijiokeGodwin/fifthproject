@@ -3,21 +3,17 @@ import { Form, Input, Button, Spin } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth';
 
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-
-
 class NormalLoginForm extends React.Component {
-    onFinish = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Recieved values of form: ', values)
-            }
-        });
-    }
+
+    handleFinish = values => {
+                this.props.onAuth(values.userName, values.password)
+                this.props.history.push('/');
+            };
 
     render(){
 
@@ -28,7 +24,6 @@ class NormalLoginForm extends React.Component {
             );
         }
 
-        
         return (
             <div>{errorMessage}
                 {
@@ -41,7 +36,7 @@ class NormalLoginForm extends React.Component {
                 <Form
                 name="normal_login"
                 className="login-form"
-                onFinish={this.onFinish}
+                onFinish={this.handleFinish}
                 >
 
                 <Form.Item
@@ -77,8 +72,9 @@ class NormalLoginForm extends React.Component {
                         Login
                     </Button>
                     Or 
-                    <NavLink style={{marginRight: '10px'}} to='/signup/'>
-                         Signup
+                    <NavLink 
+                    style={{marginRight: '10px'}} 
+                    to='/signup/'> Signup
                     </NavLink>
                 </Form.Item>
 
@@ -95,4 +91,11 @@ const mapStateToProps = (state) => {
         error: state.error
     }
 }
-export default connect(mapStateToProps)(NormalLoginForm);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (username, password) => dispatch(actions.authLogin(username, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NormalLoginForm);
