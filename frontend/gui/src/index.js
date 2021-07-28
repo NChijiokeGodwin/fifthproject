@@ -8,9 +8,10 @@ import thunk from 'redux-thunk';
 
 import reducer from './store/reducers/auth';
 
-const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSIONS_COMPOSE__ || compose
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-const store = createStore(reducer, composeEnhances(
+
+const store = createStore(reducer, composeEnhancers(
   applyMiddleware(thunk)
 ))
 
