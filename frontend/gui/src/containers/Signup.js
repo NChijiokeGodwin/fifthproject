@@ -1,14 +1,22 @@
 import React from 'react';
-import { Form, Input, Cascader, Button, AutoComplete } from 'antd';
-import { UserOutlined, MessageOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Form, Input, Button } from 'antd';
+import { UserOutlined, MailOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth';
 
 
 class RegistrationForm extends React.Component {
   formRef = React.createRef();
 
   handleFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
+    this.props.onAuth(
+        values.username,
+        values.email,
+        values.password,
+        values.confirm);
+    this.props.history.push('/');
+    };
 
   render() {
     return (
@@ -44,7 +52,7 @@ class RegistrationForm extends React.Component {
               },
             ]}
           >
-            <Input prefix={<MessageOutlined className="site-form-item-icon" />} placeholder="Email" />
+            <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
           </Form.Item>
     
           <Form.Item
@@ -91,10 +99,15 @@ class RegistrationForm extends React.Component {
             />
           </Form.Item>
     
-          <Form.Item >
-            <Button type="primary" htmlType="submit">
-              Register
+          <Form.Item>
+            <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
+            Signup
             </Button>
+            Or 
+            <NavLink 
+            style={{marginRight: '10px'}} 
+            to='/login/'> Login
+            </NavLink>
           </Form.Item>
         </Form>
       );
@@ -102,4 +115,18 @@ class RegistrationForm extends React.Component {
   
 };
 
-export default RegistrationForm;
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.loading,
+        error: state.error
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (username, email, password1, password2) => dispatch(actions.authSignup(username, email, password1, password2))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

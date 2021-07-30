@@ -11,7 +11,7 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 class NormalLoginForm extends React.Component {
 
     handleFinish = values => {
-                this.props.onAuth(values.userName, values.password)
+                this.props.onAuth(values.username, values.password)
                 this.props.history.push('/');
             };
 
