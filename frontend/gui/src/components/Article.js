@@ -38,7 +38,7 @@ const Articles = (props) => {
             <img
                 width={272}
                 alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                src={`https://robohash.org/${item.id}?200x200`}
             />
             }
         >
